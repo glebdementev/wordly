@@ -9,9 +9,6 @@
   <img src="https://img.shields.io/badge/Vite-5.4-646CFF?style=flat-square&logo=vite" alt="Vite">
 </p>
 
-<p align="center">
-  <a href="https://glebsonik.github.io/wordly/">🚀 Live Demo</a>
-</p>
 
 ---
 
@@ -41,10 +38,6 @@ The app features a distinctive retro terminal aesthetic with:
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/glebsonik/wordly.git
-cd wordly
-
 # Install dependencies
 npm install
 

@@ -1,4 +1,4 @@
-import { BookOpen, RotateCcw, Github } from 'lucide-react'
+import { BookOpen, RotateCcw } from 'lucide-react'
 
 interface HeaderProps {
   bookTitle: string | null
@@ -21,15 +21,6 @@ export function Header({ bookTitle, onReset }: HeaderProps) {
               EPUB Vocabulary Analyzer
             </p>
           </div>
-          <a
-            href="https://glebsonik.github.io/wordly/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 p-2 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-accent-primary)] hover:bg-[var(--color-bg-hover)] transition-colors group"
-            title="View on GitHub Pages"
-          >
-            <Github className="w-5 h-5 text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent-primary)]" />
-          </a>
         </div>
         
         {bookTitle && (
