@@ -59,7 +59,7 @@ export function DefinitionPanel({ word, definition, isLoading, error }: Definiti
 
       {/* Definition content */}
       {definition && !isLoading && (
-        <div className="space-y-4 max-h-[250px] overflow-y-auto pr-2">
+        <div className="space-y-4 pr-2">
           {definition.meanings.map((meaning, idx) => (
             <div key={idx} className="animate-fade-in" style={{ animationDelay: `${idx * 100}ms` }}>
               <span className="inline-block px-2 py-0.5 text-xs font-mono rounded bg-[var(--color-bg-tertiary)] text-[var(--color-amber)] border border-[var(--color-amber)]/30 mb-2">

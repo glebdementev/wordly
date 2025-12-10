@@ -16,7 +16,7 @@ export function WordList({ words, selectedWord, onWordSelect }: WordListProps) {
     : words
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col">
       {/* Header */}
       <div className="p-4 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
         <div className="flex items-center justify-between mb-3">
@@ -55,7 +55,7 @@ export function WordList({ words, selectedWord, onWordSelect }: WordListProps) {
       </div>
       
       {/* Word list */}
-      <div className="flex-1 overflow-y-auto">
+      <div>
         {filteredWords.length === 0 ? (
           <div className="flex items-center justify-center h-32 text-[var(--color-text-muted)] text-sm">
             {searchQuery ? 'No matching words found' : 'No rare words found'}

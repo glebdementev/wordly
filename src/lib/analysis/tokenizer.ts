@@ -42,19 +42,43 @@ export function tokenize(text: string): string[] {
 }
 
 /**
- * Split text into sentences
+ * Split text into context chunks (paragraphs or sentence groups)
+ * Preserves natural text boundaries like dialogue and paragraph breaks
  */
 export function splitSentences(text: string): string[] {
-  // Simple sentence splitting - split on .!? followed by space and capital letter
-  // or newlines
-  const sentences = text
-    .replace(/\n+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .split(/(?<=[.!?])\s+(?=[A-Z])/)
-    .map(s => s.trim())
-    .filter(s => s.length > 10 && s.length < 1000) // Filter out too short/long
+  // Split on paragraph boundaries (one or more blank lines, or multiple newlines)
+  const paragraphs = text
+    .split(/\n\s*\n+|\n{2,}/)
+    .map(p => p.trim())
+    .filter(p => p.length > 0)
   
-  return sentences
+  const chunks: string[] = []
+  
+  for (const para of paragraphs) {
+    // Normalize internal whitespace (single newlines become spaces, collapse multiple spaces)
+    const normalized = para
+      .replace(/\n/g, ' ')
+      // Fix missing spaces after punctuation followed by capital letter
+      .replace(/([.!?])([A-Z])/g, '$1 $2')
+      .replace(/\s+/g, ' ')
+      .trim()
+    
+    // If paragraph is a reasonable size, keep it as one chunk
+    if (normalized.length >= 10 && normalized.length <= 1000) {
+      chunks.push(normalized)
+    } 
+    // If too long, split into sentences
+    else if (normalized.length > 1000) {
+      const sentences = normalized
+        .split(/(?<=[.!?])\s+(?=[A-Z])/)
+        .map(s => s.trim())
+        .filter(s => s.length >= 10 && s.length <= 1000)
+      chunks.push(...sentences)
+    }
+    // Skip chunks that are too short
+  }
+  
+  return chunks
 }
 
 /**

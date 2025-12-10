@@ -23,7 +23,7 @@ export function ContextPanel({ word, contexts }: ContextPanelProps) {
   }
 
   return (
-    <div className="flex-1 overflow-hidden flex flex-col">
+    <div className="flex flex-col">
       <div className="px-4 py-3 border-b border-[var(--color-border)] flex items-center gap-2">
         <BookOpen className="w-4 h-4 text-[var(--color-text-muted)]" />
         <h3 className="text-sm font-semibold text-[var(--color-text-primary)] font-mono uppercase tracking-wider">
@@ -34,7 +34,7 @@ export function ContextPanel({ word, contexts }: ContextPanelProps) {
         </span>
       </div>
       
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div className="p-4 space-y-3">
         {contexts.length === 0 ? (
           <p className="text-sm text-[var(--color-text-muted)] text-center py-8">
             No context available

@@ -1,4 +1,4 @@
-import { getGlobalRank, isKnownEnglishWord } from './wordRanks'
+import { getGlobalRank, TOTAL_RANKED_WORDS } from './wordRanks'
 
 export interface WordRarity {
   word: string
@@ -12,8 +12,11 @@ export interface WordRarity {
  * Higher score = rarer word (more interesting to learn)
  */
 export function calculateRarityScore(bookFrequency: number, globalRank: number): number {
-  // If word is not in top 10k, give it a very high rank
-  const effectiveRank = globalRank === Infinity ? 15000 : globalRank
+  // Words that don't appear in the global corpus are treated as extremely rare
+  // by assigning them a rank well beyond the end of the corpus.
+  const effectiveRank = globalRank === Infinity 
+    ? TOTAL_RANKED_WORDS * 10 
+    : globalRank
   
   // Rarity score formula:
   // - Words rare in the language (high rank) get higher scores
@@ -43,10 +46,6 @@ export function findRareWords(
     
     const globalRank = getGlobalRank(word)
     
-    // Only include words that are in the English dictionary
-    // This filters out typos, OCR errors, and foreign words
-    if (!isKnownEnglishWord(word)) continue
-    
     // Skip common words (in top N most common)
     if (globalRank < minGlobalRank) continue
     
@@ -67,4 +66,4 @@ export function findRareWords(
 }
 
 // Re-export for convenience
-export { getGlobalRank, isKnownEnglishWord }
+export { getGlobalRank }

@@ -52,7 +52,7 @@ function App() {
     <div className="min-h-screen bg-[var(--color-bg-primary)] flex flex-col">
       <Header bookTitle={bookTitle} onReset={handleReset} />
       
-      <main className="flex-1 flex flex-col">
+      <main className="flex flex-col">
         {!bookTitle ? (
           <div className="flex-1 flex items-center justify-center p-8">
             <FileUpload 
@@ -62,9 +62,9 @@ function App() {
             />
           </div>
         ) : (
-          <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-0">
+          <div className="flex flex-col lg:flex-row">
             {/* Left side: Word list */}
-            <div className="border-r border-[var(--color-border)] overflow-hidden flex flex-col">
+            <div className="flex-1 border-r border-[var(--color-border)]">
               <WordList 
                 words={rareWords} 
                 selectedWord={selectedWord}
@@ -72,8 +72,8 @@ function App() {
               />
             </div>
             
-            {/* Right side: Definition and Context */}
-            <div className="flex flex-col overflow-hidden bg-[var(--color-bg-secondary)]">
+            {/* Right side: Definition and Context - sticky */}
+            <div className="w-full lg:w-[400px] lg:sticky lg:top-0 lg:self-start lg:h-screen lg:overflow-y-auto bg-[var(--color-bg-secondary)]">
               {selectedWord ? (
                 <>
                   <DefinitionPanel 
@@ -88,7 +88,7 @@ function App() {
                   />
                 </>
               ) : (
-                <div className="flex-1 flex items-center justify-center p-8">
+                <div className="h-full flex items-center justify-center p-8">
                   <p className="text-[var(--color-text-muted)] font-mono text-sm">
                     ← Select a word to see its definition and context
                   </p>
