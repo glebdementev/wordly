@@ -6,6 +6,7 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // Change this to match your GitHub repo name: '/repo-name/' or '/' for username.github.io repos
   base: '/wordly/',
   resolve: {
     alias: {
